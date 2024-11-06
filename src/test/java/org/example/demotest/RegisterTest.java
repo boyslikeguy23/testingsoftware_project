@@ -1,0 +1,98 @@
+package org.example.demotest;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.time.Duration;
+
+public class RegisterTest {
+    private WebDriver webDriver;
+
+    @Before
+    public void setUp() throws Exception {
+        webDriver = new ChromeDriver();
+        webDriver.manage().window().maximize();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        webDriver.navigate().to("https://ticketbox.vn/");
+    }
+
+    @Test
+    public void registerNoBoth() throws InterruptedException {
+        WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
+        loginButton.click();
+        Thread.sleep(200);
+        WebElement txtRegister = webDriver.findElement(By.xpath("//div[contains(text(), 'Tạo tài khoản ngay')]"));
+        txtRegister.click();
+        Thread.sleep(200);
+        WebElement txtEmail = webDriver.findElement(By.id("normal_login_email"));
+        txtEmail.sendKeys("1");
+        txtEmail.sendKeys(Keys.CONTROL + "a");
+        txtEmail.sendKeys(Keys.DELETE);
+        Thread.sleep(20);
+        WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
+        txtPassword.sendKeys("1");
+        txtPassword.sendKeys(Keys.CONTROL + "a");
+        txtPassword.sendKeys(Keys.DELETE);
+        Thread.sleep(20);
+        WebElement txtRePassword = webDriver.findElement(By.id("normal_login_re_password"));
+        txtRePassword.sendKeys("1");
+        txtRePassword.sendKeys(Keys.CONTROL + "a");
+        txtRePassword.sendKeys(Keys.DELETE);
+        Thread.sleep(20);
+        WebElement loginContinue = webDriver.findElement(By.xpath("//button[contains(text(), 'Tiếp tục')]"));
+        loginContinue.click();
+    }
+
+    @Test
+    public void registerNoPassword() throws InterruptedException {
+        WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
+        loginButton.click();
+        Thread.sleep(200);
+        WebElement txtRegister = webDriver.findElement(By.xpath("//div[contains(text(), 'Tạo tài khoản ngay')]"));
+        txtRegister.click();
+        Thread.sleep(200);
+        WebElement txtEmail = webDriver.findElement(By.id("normal_login_email"));
+        txtEmail.sendKeys("perla@gmail.com");
+        Thread.sleep(20);
+        WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
+        txtPassword.sendKeys("1");
+        txtPassword.sendKeys(Keys.CONTROL + "a");
+        txtPassword.sendKeys(Keys.DELETE);
+        Thread.sleep(20);
+        WebElement txtRePassword = webDriver.findElement(By.id("normal_login_re_password"));
+        txtRePassword.sendKeys("1");
+        txtRePassword.sendKeys(Keys.CONTROL + "a");
+        txtRePassword.sendKeys(Keys.DELETE);
+        Thread.sleep(20);
+        WebElement loginContinue = webDriver.findElement(By.xpath("//button[contains(text(), 'Tiếp tục')]"));
+        loginContinue.click();
+    }
+
+    @Test
+    public void registerEmailExisted() throws InterruptedException {
+        WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
+        loginButton.click();
+        Thread.sleep(200);
+        WebElement txtRegister = webDriver.findElement(By.xpath("//div[contains(text(), 'Tạo tài khoản ngay')]"));
+        txtRegister.click();
+        Thread.sleep(200);
+        WebElement txtEmail = webDriver.findElement(By.id("normal_login_email"));
+        txtEmail.sendKeys("perla@gmail.com");
+        Thread.sleep(20);
+        WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
+        txtPassword.sendKeys("123456");
+        Thread.sleep(20);
+        WebElement txtRePassword = webDriver.findElement(By.id("normal_login_re_password"));
+        txtRePassword.sendKeys("123456");
+        Thread.sleep(20);
+        WebElement loginContinue = webDriver.findElement(By.xpath("//button[contains(text(), 'Tiếp tục')]"));
+        loginContinue.click();
+    }
+
+
+}
