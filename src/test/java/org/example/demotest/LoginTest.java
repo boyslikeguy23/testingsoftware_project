@@ -61,6 +61,49 @@ public class LoginTest {
         txtPassword.sendKeys(Keys.DELETE);
     }
 
+    @Test
+    public void loginWrongBoth() throws InterruptedException {
+        WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
+        loginButton.click();
+        Thread.sleep(2000);
+        WebElement txtUsername = webDriver.findElement(By.id("normal_login_username"));
+        txtUsername.sendKeys("tungxuanmai2@gmail.com");
+        WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
+        txtPassword.sendKeys("1");
+        Thread.sleep(20);
+        WebElement loginContinue = webDriver.findElement(By.xpath("//button[contains(text(), 'Tiếp tục')]"));
+        loginButton.click();
+    }
+
+    @Test
+    public void loginRightUsernameWrongPass() throws InterruptedException {
+        WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
+        loginButton.click();
+        Thread.sleep(2000);
+        WebElement txtUsername = webDriver.findElement(By.id("normal_login_username"));
+        txtUsername.sendKeys("tungxuanmai2003@gmail.com");
+        WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
+        txtPassword.sendKeys("1");
+        Thread.sleep(20);
+        WebElement loginContinue = webDriver.findElement(By.xpath("//span[contains(text(), 'Tiếp tục')]"));
+        loginContinue.click();
+    }
+
+    @Test
+    public void loginSuccessfully() throws InterruptedException {
+        WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
+        loginButton.click();
+        Thread.sleep(2000);
+        WebElement txtUsername = webDriver.findElement(By.id("normal_login_username"));
+        txtUsername.sendKeys("tungxuanmai2003@gmail.com");
+        WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
+        txtPassword.sendKeys("Springter2003");
+        Thread.sleep(20);
+        WebElement loginContinue = webDriver.findElement(By.xpath("//span[contains(text(), 'Tiếp tục')]"));
+        Thread.sleep(200);
+        loginContinue.click();
+    }
+
     @After
     public void tearDown() throws Exception {
         try {
