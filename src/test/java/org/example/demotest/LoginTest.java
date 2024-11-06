@@ -26,7 +26,7 @@ public class LoginTest {
     }
 
     @Test
-    public void loginNothing() throws InterruptedException {
+    public void loginNoUsername() throws InterruptedException {
         WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
         loginButton.click();
         Thread.sleep(2000);
@@ -45,14 +45,30 @@ public class LoginTest {
         txtPassword.sendKeys("1234567");
     }
 
-//    @After
-//    public void tearDown() throws Exception {
-//        try {
-//            Thread.sleep(2000);
-//            webDriver.close();
-//            webDriver.quit();
-//        } catch (Exception e) {
-//            System.out.println("Đã xảy ra lỗi: " + e);
-//        }
-//    }
+    @Test
+    public void loginNoPassword() throws InterruptedException {
+        WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
+        loginButton.click();
+        Thread.sleep(2000);
+        WebElement txtUsername = webDriver.findElement(By.id("normal_login_username"));
+        txtUsername.sendKeys("tungxuanmai2003@gmail.com");
+        Thread.sleep(20);
+//        txtUsername.sendKeys(Keys.CONTROL + "a");
+//        txtUsername.sendKeys(Keys.DELETE);
+        WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
+        txtPassword.sendKeys("1");
+        txtPassword.sendKeys(Keys.CONTROL + "a");
+        txtPassword.sendKeys(Keys.DELETE);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        try {
+            Thread.sleep(2000);
+            webDriver.close();
+            webDriver.quit();
+        } catch (Exception e) {
+            System.out.println("Đã xảy ra lỗi: " + e);
+        }
+    }
 }
