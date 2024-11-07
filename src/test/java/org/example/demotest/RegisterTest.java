@@ -1,5 +1,6 @@
 package org.example.demotest;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -44,8 +45,13 @@ public class RegisterTest {
         txtRePassword.sendKeys(Keys.CONTROL + "a");
         txtRePassword.sendKeys(Keys.DELETE);
         Thread.sleep(20);
-        WebElement loginContinue = webDriver.findElement(By.xpath("//button[contains(text(), 'Tiếp tục')]"));
-        loginContinue.click();
+
+        WebElement emailRequiredMessage = webDriver.findElement(By.xpath("//div[contains(text(), 'Nhập email của bạn')]"));
+        WebElement passwordRequiredMessage = webDriver.findElement(By.xpath("//div[contains(text(), 'Nhập mật khẩu')]"));
+
+        Assert.assertNotNull(emailRequiredMessage);
+        Assert.assertNotNull(passwordRequiredMessage);
+
     }
 
     @Test
@@ -69,8 +75,9 @@ public class RegisterTest {
         txtRePassword.sendKeys(Keys.CONTROL + "a");
         txtRePassword.sendKeys(Keys.DELETE);
         Thread.sleep(20);
-        WebElement loginContinue = webDriver.findElement(By.xpath("//button[contains(text(), 'Tiếp tục')]"));
-        loginContinue.click();
+        WebElement passwordRequiredMessage = webDriver.findElement(By.xpath("//div[contains(text(), 'Nhập mật khẩu')]"));
+        Assert.assertNotNull(passwordRequiredMessage);
+
     }
 
     @Test
@@ -90,8 +97,10 @@ public class RegisterTest {
         WebElement txtRePassword = webDriver.findElement(By.id("normal_login_re_password"));
         txtRePassword.sendKeys("123456");
         Thread.sleep(20);
-        WebElement loginContinue = webDriver.findElement(By.xpath("//button[contains(text(), 'Tiếp tục')]"));
+        WebElement loginContinue = webDriver.findElement(By.xpath("//span[contains(text(), 'Tiếp tục')]"));
         loginContinue.click();
+
+
     }
 
 
