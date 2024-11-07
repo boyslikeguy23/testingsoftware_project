@@ -145,7 +145,7 @@ public class TicketActionTest {
         WebElement buttonLogin = webDriver.findElement(By.xpath("//button[span[text()='Tiếp tục']]"));
         buttonLogin.click();
         Thread.sleep(200);
-        
+
         WebElement buyNowBtn = webDriver.findElement(By.id("buynow-btn"));
         buyNowBtn.click();
         // Chon so luong ve
