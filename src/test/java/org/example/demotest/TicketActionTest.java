@@ -163,25 +163,20 @@ public class TicketActionTest {
         buyNowBtn.click();
 
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
-        List<WebElement> canvases = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.tagName("canvas")));
-        WebElement mainCanvas = canvases.get(1);
 
-//        // Get the canvas dimensions
+//        List<WebElement> canvases = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.tagName("canvas")));
+//        WebElement mainCanvas = canvases.get(1);
+//        // Lấy diện tích của canvas
 //        int canvasWidth = mainCanvas.getSize().getWidth();
 //        int canvasHeight = mainCanvas.getSize().getHeight();
 //
-//        // Set proportional coordinates for the gray area (CAT 1A as an example)
-//        // Adjust these values based on where the gray areas are located in the canvas image
-//        double proportionX = 0.5; // 50% from the left (adjust as necessary)
-//        double proportionY = 0.2; // 20% from the top (adjust as necessary)
-//
-//        // Convert proportions to pixel coordinates
+//        double proportionX = 0.5; // 1 nửa từ trái sang phải
+//        double proportionY = 0.2; // 20% từ trên xuống
 //        int clickX = (int) (canvasWidth * proportionX);
 //        int clickY = (int) (canvasHeight * proportionY);
 //
-//        // Perform the click action
 //        new Actions(webDriver)
-//                .moveToElement(mainCanvas, clickX - canvasWidth / 2, clickY - canvasHeight / 2) // center the offset
+//                .moveToElement(mainCanvas, clickX - canvasWidth / 2, clickY - canvasHeight / 2)
 //                .click()
 //                .perform();
 
