@@ -16,7 +16,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class TicketActionTest {
-//    private String homePageURL = "https://ticketbox.vn/";
+    private String homePageURL = "https://ticketbox.vn/";
     private String eventWithPaymentURL = "https://ticketbox.vn/da-nang-nhung-thanh-pho-mo-mang-2024-22981?utm_medium=trending-events&utm_source=tkb-homepage";
     private String eventWithSoldOutTicket = "https://ticketbox.vn/anh-trai-say-hi-concert-2024-day-3-23254?utm_medium=hero-banner&utm_source=tkb-homepage";
     private WebDriver webDriver;
@@ -197,7 +197,7 @@ public class TicketActionTest {
     }
 
     @Test
-    public void cancelTicketPayment() throws InterruptedException {
+    public void cancelTicketPaymentReturnToHomepageButFailed() throws InterruptedException {
         webDriver.navigate().to(eventWithPaymentURL);
         WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
         loginButton.click();
@@ -224,13 +224,10 @@ public class TicketActionTest {
         Thread.sleep(3000);
         webDriver.navigate().back();
         //
-        WebElement buttonCancel = webDriver.findElement(By.xpath("//button[text()='Huỷ đơn']"));
+        WebElement buttonCancel = webDriver.findElement(By.xpath("//button[contains(text(), 'Hủy đơn')]"));
         buttonCancel.click();
 
-
-
-
-
+        Assert.assertNotEquals(homePageURL, webDriver.getCurrentUrl());
     }
 
 
