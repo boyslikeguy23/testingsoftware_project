@@ -9,19 +9,22 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.openqa.selenium.support.locators.RelativeLocator;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 public class LoginTest {
     private WebDriver webDriver;
+    private String homePageURL = "https://ticketbox.vn/";
 
     @Before
     public void setUp() throws Exception {
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        webDriver.navigate().to("https://ticketbox.vn/");
+        webDriver.navigate().to(homePageURL);
     }
 
     @Test
@@ -43,6 +46,7 @@ public class LoginTest {
         WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
         txtPassword.sendKeys("1234567");
 
+        //phân biệt với text trong placeholder của thẻ input normal_login_password
         WebElement emailRequiredMessage = webDriver.findElement(By.xpath("//div[contains(@class, 'ant-form-item-explain-error') and contains(text(), 'Nhập email hoặc số điện thoại')]"));
         Assert.assertNotNull(emailRequiredMessage);
     }
@@ -55,10 +59,8 @@ public class LoginTest {
         WebElement txtUsername = webDriver.findElement(By.id("normal_login_username"));
         txtUsername.sendKeys("tungxuanmai2003@gmail.com");
         Thread.sleep(20);
-//        txtUsername.sendKeys(Keys.CONTROL + "a");
-//        txtUsername.sendKeys(Keys.DELETE);
         WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
-        txtPassword.sendKeys("1");
+        txtPassword.sendKeys("1234567");
         txtPassword.sendKeys(Keys.CONTROL + "a");
         txtPassword.sendKeys(Keys.DELETE);
 
@@ -67,20 +69,22 @@ public class LoginTest {
     }
 
     @Test
-    public void loginWrongBoth() throws InterruptedException {
+    public void testWrongUsernameAndPassword() throws InterruptedException {
         WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
         loginButton.click();
         Thread.sleep(2000);
+
         WebElement txtUsername = webDriver.findElement(By.id("normal_login_username"));
         txtUsername.sendKeys("tungxuanmai2@gmail.com");
-        WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
-        txtPassword.sendKeys("123456");
         Thread.sleep(20);
-        WebElement loginContinue = webDriver.findElement(By.xpath("//span[contains(text(), 'Tiếp tục')]"));
-        loginContinue.click();
+        WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
+        txtPassword.sendKeys("abcdfdfd");
+        Thread.sleep(20);
+        WebElement buttonLogin = webDriver.findElement(By.xpath("//button[span[text()='Tiếp tục']]"));
+        buttonLogin.click();
 
-        WebElement emailMessage = webDriver.findElement(By.xpath("//div[contains(@class, 'ant-form-item-explain-error') and contains(text(), 'Tài khoản chưa tồn tại')]"));
-        Assert.assertNotNull(emailMessage);
+        WebElement accountDoesntExistMessage = webDriver.findElement(By.xpath("//div[contains(@class, 'ant-form-item-explain-error') and contains(text(), 'Tài khoản chưa tồn tại. Vui lòng đăng ký tài khoản mới')]"));
+        Assert.assertNotNull(accountDoesntExistMessage);
     }
 
     @Test
@@ -91,13 +95,13 @@ public class LoginTest {
         WebElement txtUsername = webDriver.findElement(By.id("normal_login_username"));
         txtUsername.sendKeys("tungxuanmai2003@gmail.com");
         WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
-        txtPassword.sendKeys("123456");
+        txtPassword.sendKeys("312312312");
         Thread.sleep(20);
-        WebElement loginContinue = webDriver.findElement(By.xpath("//span[contains(text(), 'Tiếp tục')]"));
-        loginContinue.click();
+        WebElement buttonLogin = webDriver.findElement(By.xpath("//button[span[text()='Tiếp tục']]"));
+        buttonLogin.click();
 
-        WebElement emailMessage = webDriver.findElement(By.xpath("//div[contains(@class, 'ant-form-item-explain-error') and contains(text(), 'Thông tin đăng nhập không hợp lệ')]"));
-        Assert.assertNotNull(emailMessage);
+        WebElement accountDoesntExistMessage = webDriver.findElement(By.xpath("//div[contains(@class, 'ant-form-item-explain-error') and contains(text(), 'Thông tin đăng nhập không hợp lệ. Bạn còn 2 lần thử lại')]"));
+        Assert.assertNotNull(accountDoesntExistMessage);
     }
 
     @Test
@@ -110,9 +114,12 @@ public class LoginTest {
         WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
         txtPassword.sendKeys("Springter2003");
         Thread.sleep(20);
-        WebElement loginContinue = webDriver.findElement(By.xpath("//span[contains(text(), 'Tiếp tục')]"));
-        Thread.sleep(200);
-        loginContinue.click();
+        WebElement buttonLogin = webDriver.findElement(By.xpath("//button[span[text()='Tiếp tục']]"));
+        buttonLogin.click();
+
+        //kiểm tra về trang chủ chưa
+        String urlCurrent = webDriver.getCurrentUrl();
+        Assert.assertEquals(homePageURL, urlCurrent);
     }
 
     @After
