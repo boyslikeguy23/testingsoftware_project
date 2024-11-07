@@ -223,8 +223,8 @@ public class TicketActionTest {
 
         Thread.sleep(3000);
         webDriver.navigate().back();
-
-        WebElement buttonCancel = webDriver.findElement(By.xpath("//button[span[text()='Huỷ đơn']]"));
+        //
+        WebElement buttonCancel = webDriver.findElement(By.xpath("//button[text()='Huỷ đơn']"));
         buttonCancel.click();
 
 
