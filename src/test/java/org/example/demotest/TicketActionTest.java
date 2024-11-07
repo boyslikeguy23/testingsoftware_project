@@ -5,10 +5,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -44,10 +41,10 @@ public class TicketActionTest {
         WebElement buttonLogin = webDriver.findElement(By.xpath("//button[span[text()='Tiếp tục']]"));
         buttonLogin.click();
         Thread.sleep(200);
-
+        // An nut mua
         WebElement buyNowBtn = webDriver.findElement(By.id("buynow-btn"));
         buyNowBtn.click();
-
+        // Chon so luong ve
         WebElement plusButton = webDriver.findElement(By.xpath("//button[contains(@class, 'ant-btn') and span[text()='+']]"));
         plusButton.click();
         Thread.sleep(2000);
@@ -133,6 +130,44 @@ public class TicketActionTest {
         System.out.println("Đã bắt được thông báo lỗi với thông điệp: " + notificationText);
         Assert.assertNotNull("Đã hiện thông báo lỗi khi chọn vé đã hết", notificationText);
     }
+
+    @Test
+    public void cancelTicketPayment() throws InterruptedException {
+        webDriver.navigate().to(eventWithPaymentURL);
+        WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
+        loginButton.click();
+        Thread.sleep(2000);
+        WebElement txtUsername = webDriver.findElement(By.id("normal_login_username"));
+        txtUsername.sendKeys("tungxuanmai2003@gmail.com");
+        WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
+        txtPassword.sendKeys("Springter2003");
+        Thread.sleep(20);
+        WebElement buttonLogin = webDriver.findElement(By.xpath("//button[span[text()='Tiếp tục']]"));
+        buttonLogin.click();
+        Thread.sleep(200);
+        
+        WebElement buyNowBtn = webDriver.findElement(By.id("buynow-btn"));
+        buyNowBtn.click();
+        // Chon so luong ve
+        WebElement plusButton = webDriver.findElement(By.xpath("//button[contains(@class, 'ant-btn') and span[text()='+']]"));
+        plusButton.click();
+        Thread.sleep(2000);
+
+        WebElement continueButton = webDriver.findElement(By.xpath("//button[contains(@class, 'style__ContinueBtnWrapper') and contains(text(), 'Tiếp tục - 699.000 đ')]"));
+        continueButton.click();
+
+        Thread.sleep(3000);
+        webDriver.navigate().back();
+
+        WebElement buttonCancel = webDriver.findElement(By.xpath("//button[span[text()='Huỷ đơn']]"));
+        buttonCancel.click();
+
+
+
+
+
+    }
+
 
     @After
     public void tearDown() throws Exception {
