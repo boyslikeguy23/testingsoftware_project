@@ -60,6 +60,7 @@ public class LoginTest {
         txtUsername.sendKeys("tungxuanmai2003@gmail.com");
         Thread.sleep(20);
         WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
+        // O duoi la to hop de khien cho textbox trong boi vi
         txtPassword.sendKeys("1234567");
         txtPassword.sendKeys(Keys.CONTROL + "a");
         txtPassword.sendKeys(Keys.DELETE);

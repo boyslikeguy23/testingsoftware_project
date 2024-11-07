@@ -1,5 +1,6 @@
 package org.example.demotest;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -89,6 +90,53 @@ public class RegisterTest {
         txtRegister.click();
         Thread.sleep(200);
         WebElement txtEmail = webDriver.findElement(By.id("normal_login_email"));
+        txtEmail.sendKeys("thaophuonggg.152003@gmail.com");
+        Thread.sleep(20);
+        WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
+        txtPassword.sendKeys("123456");
+        Thread.sleep(20);
+        WebElement txtRePassword = webDriver.findElement(By.id("normal_login_re_password"));
+        txtRePassword.sendKeys("123456");
+        Thread.sleep(20);
+        WebElement loginContinue = webDriver.findElement(By.xpath("//span[contains(text(), 'Tiếp tục')]"));
+        loginContinue.click();
+        WebElement emailExistedMessage = webDriver.findElement(By.xpath("//div[contains(text(), 'Email đã tồn tại. Vui lòng nhập email khác')]"));
+        emailExistedMessage.getText();
+        Assert.assertEquals("Email đã tồn tại. Vui lòng nhập email khác", emailExistedMessage.getText());
+
+    }
+
+    @Test
+    public void emailNotValid() throws InterruptedException {
+        WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
+        loginButton.click();
+        Thread.sleep(200);
+        WebElement txtRegister = webDriver.findElement(By.xpath("//div[contains(text(), 'Tạo tài khoản ngay')]"));
+        txtRegister.click();
+        Thread.sleep(200);
+        WebElement txtEmail = webDriver.findElement(By.id("normal_login_email"));
+        txtEmail.sendKeys("perla@com");
+        Thread.sleep(20);
+        WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
+        txtPassword.sendKeys("123456");
+        Thread.sleep(20);
+        WebElement txtRePassword = webDriver.findElement(By.id("normal_login_re_password"));
+        txtRePassword.sendKeys("123456");
+        Thread.sleep(20);
+        WebElement emailNotValidMessage = webDriver.findElement(By.xpath("//div[contains(text(), 'Email sai định dạng')]"));
+        emailNotValidMessage.getText();
+        Assert.assertEquals("Email sai định dạng", emailNotValidMessage.getText());
+    }
+
+    @Test
+    public void registerSuccessfully() throws InterruptedException {
+        WebElement loginButton = webDriver.findElement(By.xpath("//span[contains(text(), 'Đăng nhập | Đăng ký')]"));
+        loginButton.click();
+        Thread.sleep(200);
+        WebElement txtRegister = webDriver.findElement(By.xpath("//div[contains(text(), 'Tạo tài khoản ngay')]"));
+        txtRegister.click();
+        Thread.sleep(200);
+        WebElement txtEmail = webDriver.findElement(By.id("normal_login_email"));
         txtEmail.sendKeys("perla@gmail.com");
         Thread.sleep(20);
         WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
@@ -99,9 +147,19 @@ public class RegisterTest {
         Thread.sleep(20);
         WebElement loginContinue = webDriver.findElement(By.xpath("//span[contains(text(), 'Tiếp tục')]"));
         loginContinue.click();
-
-
+        Thread.sleep(2000);
+        WebElement popupOTP = webDriver.findElement(By.xpath("//span[contains(text(), 'Xác thực OTP')]"));
+        Assert.assertNotNull(popupOTP);
     }
 
-
+    @After
+    public void tearDown() throws Exception {
+        try {
+            Thread.sleep(2000);
+            webDriver.close();
+            webDriver.quit();
+        } catch (Exception e) {
+            System.out.println("Đã xảy ra lỗi: " + e);
+        }
+    }
 }
