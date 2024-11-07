@@ -63,6 +63,9 @@ public class LoginTest {
         txtPassword.sendKeys("1");
         txtPassword.sendKeys(Keys.CONTROL + "a");
         txtPassword.sendKeys(Keys.DELETE);
+
+        WebElement passwordRequiredMessage = webDriver.findElement(By.xpath("//div[contains(@class, 'ant-form-item-explain-error') and contains(text(), 'Nhập mật khẩu')]"));
+        Assert.assertNotNull(passwordRequiredMessage);
     }
 
     @Test
@@ -73,10 +76,13 @@ public class LoginTest {
         WebElement txtUsername = webDriver.findElement(By.id("normal_login_username"));
         txtUsername.sendKeys("tungxuanmai2@gmail.com");
         WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
-        txtPassword.sendKeys("1");
+        txtPassword.sendKeys("123456");
         Thread.sleep(20);
-        WebElement loginContinue = webDriver.findElement(By.xpath("//button[contains(text(), 'Tiếp tục')]"));
-        loginButton.click();
+        WebElement loginContinue = webDriver.findElement(By.xpath("//span[contains(text(), 'Tiếp tục')]"));
+        loginContinue.click();
+
+        WebElement emailMessage = webDriver.findElement(By.xpath("//div[contains(@class, 'ant-form-item-explain-error') and contains(text(), 'Tài khoản chưa tồn tại')]"));
+        Assert.assertNotNull(emailMessage);
     }
 
     @Test
@@ -87,10 +93,13 @@ public class LoginTest {
         WebElement txtUsername = webDriver.findElement(By.id("normal_login_username"));
         txtUsername.sendKeys("tungxuanmai2003@gmail.com");
         WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
-        txtPassword.sendKeys("1");
+        txtPassword.sendKeys("123456");
         Thread.sleep(20);
         WebElement loginContinue = webDriver.findElement(By.xpath("//span[contains(text(), 'Tiếp tục')]"));
         loginContinue.click();
+
+        WebElement emailMessage = webDriver.findElement(By.xpath("//div[contains(@class, 'ant-form-item-explain-error') and contains(text(), 'Thông tin đăng nhập không hợp lệ')]"));
+        Assert.assertNotNull(emailMessage);
     }
 
     @Test
