@@ -9,6 +9,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
 
@@ -74,9 +76,9 @@ public class RegisterTest {
         WebElement txtRePassword = webDriver.findElement(By.id("normal_login_re_password"));
         txtRePassword.sendKeys("1");
         txtRePassword.sendKeys(Keys.CONTROL + "a");
-        txtRePassword.sendKeys(Keys.DELETE);
-        Thread.sleep(20);
-        WebElement passwordRequiredMessage = webDriver.findElement(By.xpath("//div[contains(text(), 'Nhập mật khẩu')]"));
+
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        WebElement passwordRequiredMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Nhập mật khẩu')]")));
         Assert.assertNotNull(passwordRequiredMessage);
 
     }
