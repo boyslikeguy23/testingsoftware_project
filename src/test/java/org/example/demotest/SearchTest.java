@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SearchTest {
     private WebDriver webDriver;
-    String homePageURL = "https://ticketbox.vn/";
+    private String homePageURL = "https://ticketbox.vn/";
 
     @Before
     public void setUp() throws Exception {
