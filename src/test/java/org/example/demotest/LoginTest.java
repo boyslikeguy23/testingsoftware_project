@@ -1,6 +1,7 @@
 package org.example.demotest;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -37,12 +38,15 @@ public class LoginTest {
 //        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
 //        wait.until(ExpectedConditions.urlToBe("https://ticketbox.vn/"));
         WebElement txtUsername = webDriver.findElement(By.id("normal_login_username"));
-        txtUsername.sendKeys("2");
+        txtUsername.sendKeys("test@gmail.com");
         Thread.sleep(20);
         txtUsername.sendKeys(Keys.CONTROL + "a");
         txtUsername.sendKeys(Keys.DELETE);        //Thread.sleep(5000);
         WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
         txtPassword.sendKeys("1234567");
+
+        WebElement emailRequiredMessage = webDriver.findElement(By.xpath("//div[contains(@class, 'ant-form-item-explain-error') and contains(text(), 'Nhập email hoặc số điện thoại')]"));
+        Assert.assertNotNull(emailRequiredMessage);
     }
 
     @Test
