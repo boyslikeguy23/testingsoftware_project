@@ -66,7 +66,7 @@ public class RegisterTest {
         txtRegister.click();
         Thread.sleep(200);
         WebElement txtEmail = webDriver.findElement(By.id("normal_login_email"));
-        txtEmail.sendKeys("perla@gmail.com");
+        txtEmail.sendKeys("perlanguyen.ba@gmail.com");
         Thread.sleep(20);
         WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
         txtPassword.sendKeys("1");
@@ -92,7 +92,7 @@ public class RegisterTest {
         txtRegister.click();
         Thread.sleep(200);
         WebElement txtEmail = webDriver.findElement(By.id("normal_login_email"));
-        txtEmail.sendKeys("thaophuonggg.152003@gmail.com");
+        txtEmail.sendKeys("perlanguyen.ba@gmail.com");
         Thread.sleep(20);
         WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
         txtPassword.sendKeys("123456");
@@ -139,7 +139,7 @@ public class RegisterTest {
         txtRegister.click();
         Thread.sleep(200);
         WebElement txtEmail = webDriver.findElement(By.id("normal_login_email"));
-        txtEmail.sendKeys("perla@gmail.com");
+        txtEmail.sendKeys("thaophuongnguyen865@gmail.com");
         Thread.sleep(20);
         WebElement txtPassword = webDriver.findElement(By.id("normal_login_password"));
         txtPassword.sendKeys("123456");
